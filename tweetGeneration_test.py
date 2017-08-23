@@ -72,5 +72,19 @@ class TestTweetGenerationFunctions(unittest.TestCase):
 		actual, not_used = find_tweets_including_word_split_on_and_similar(word_split_on_and_similar, source_messages)
 		self.assertEqual(actual, expected_output)
 
+	def test_given_chosen_second_tweet_successfully_split_tweet_correct(self):
+		chosen_second_tweet = "hello there this is a test"
+		possible_messages = {"hello there this is a test":"this"}
+		expected_output = " is a test"
+		actual = split_chosen_second_tweet(chosen_second_tweet, possible_messages)
+		self.assertEqual(actual, expected_output)
+
+	def test_given_tweet_split_on_word_split_on(self):
+		tweet = "testing one two three"
+		word_split_on = "one"
+		expected_output = "testing one"
+		actual = split_base_tweet_on_word_split_on(tweet, word_split_on)
+		self.assertEqual(actual, expected_output)
+
 if __name__ == '__main__':
     unittest.main()

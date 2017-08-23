@@ -74,3 +74,14 @@ def find_tweets_including_word_split_on_and_similar(word_split_on_and_similar, s
 		possible_messages_list = possible_messages_list + possible_messages_list_for_comprehension
 		possible_messages = {**possible_messages, **possible_messages_for_comprehension}
 	return possible_messages, possible_messages_list
+
+def choose_second_tweet(possible_messages_list):
+	return random.choice(possible_messages_list)
+
+def split_chosen_second_tweet(chosen_second_tweet, possible_messages):
+	chosen_second_tweet_split = chosen_second_tweet.split(possible_messages[chosen_second_tweet])
+	return chosen_second_tweet_split[1]
+
+def split_base_tweet_on_word_split_on(tweet, word_split_on):
+	tweet_split = tweet.split(word_split_on)
+	return tweet_split[0] + word_split_on
