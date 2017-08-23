@@ -42,7 +42,7 @@ def select_word_to_split_on(tweet, freq_words_in_tweet, blacklist):
 def create_freq_words_in_tweet(tweet, word_dictionary):
 	words_in_tweet = tweet.split(" ")
 	freq_words_in_tweet = {}
-	total_freq = 0		
+	total_freq = 0      
 	for x in words_in_tweet:
 		if freq_words_in_tweet.get(x) == None:
 			freq_words_in_tweet[x] = word_dictionary[x]
@@ -51,9 +51,26 @@ def create_freq_words_in_tweet(tweet, word_dictionary):
 	return freq_words_in_tweet
 
 def create_source_messages_Text_object():
-    source_messages_as_Text_object = nltk.text.Text(nltk.corpus.gutenberg.words('source_messages.txt'))
-    return source_messages_as_Text_object
+	source_messages_as_Text_object = nltk.text.Text(nltk.corpus.gutenberg.words('source_messages.txt'))
+	return source_messages_as_Text_object
 
 def find_similar_words(word_split_on, source_messages_as_Text_object):
 	similar_words = source_messages_as_Text_object.similar(word_split_on).split()
 	return similar_words
+
+def find_tweets_including_word_split_on_and_similar(word_split_on_and_similar, source_messages):
+	possible_messages = {}
+	possible_messages_list = []
+	# for x in source_messages:
+	# 	x_split = x.split()
+	# 	for y in word_split_on_and_similar: 
+	# 		if y in x_split:
+	# 			possible_messages[x] = y
+	# 			possible_messages_list.append(x)
+	# 			break
+	for y in word_split_on_and_similar:
+		possible_messages_list_for_comprehension = [x for x in source_messages if y in x.split() and x not in possible_messages_list]
+		possible_messages_for_comprehension = {k:y for k in source_messages if y in k.split() and k not in possible_messages} # The value will always be the last matching word from word_split_on_and_similar
+		possible_messages_list = possible_messages_list + possible_messages_list_for_comprehension
+		possible_messages = {**possible_messages, **possible_messages_for_comprehension}
+	return possible_messages, possible_messages_list

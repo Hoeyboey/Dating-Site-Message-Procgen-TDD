@@ -54,10 +54,23 @@ class TestTweetGenerationFunctions(unittest.TestCase):
 	def test_given_word_split_on_and_Text_object_find_similar_words(self):
 		word_split_on = "I"
 		test_source_messages_as_Text_object = nltk.text.Text(nltk.corpus.gutenberg.words("melville-moby_dick.txt"))
-		expected_output = ["'he','you','it','they','we','that','not','there','ye','to','and','then','ahab','this','she','queequeg','what','stubb','all','would'"]
+		expected_output = ['he','you','it','they','we','that','not','there','ye','to','and','then','ahab','this','she','queequeg','what','stubb','all','would']
 		actual = test_source_messages_as_Text_object.similar(word_split_on).split()
 		self.assertEqual(actual, expected_output)
 
+	def test_given_word_split_on_and_similar_find_messages_with_word_split_on_and_similar_as_list(self):
+		word_split_on_and_similar = ["hello", "there"]
+		source_messages = ["hello", "this is the first test", "this is the second test hello there", "there"]
+		expected_output = ["hello", "this is the second test hello there", "there"]
+		not_used, actual = find_tweets_including_word_split_on_and_similar(word_split_on_and_similar, source_messages)
+		self.assertEqual(actual, expected_output)
+
+	def test_given_word_split_on_and_similar_find_messages_with_word_split_on_and_similar_as_dictionary(self):
+		word_split_on_and_similar = ["hello", "there"]
+		source_messages = ["hello there", "there is a message", "testing"]
+		expected_output = {"hello there":"hello", "there is a message":"there"}
+		actual, not_used = find_tweets_including_word_split_on_and_similar(word_split_on_and_similar, source_messages)
+		self.assertEqual(actual, expected_output)
 
 if __name__ == '__main__':
     unittest.main()
