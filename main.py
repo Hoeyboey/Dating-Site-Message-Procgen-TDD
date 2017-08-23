@@ -18,4 +18,4 @@ for runthrough_number in range(0, number_of_runthroughs):
 	print(chosen_second_tweet)
 	chosen_second_tweet_split = split_chosen_second_tweet(chosen_second_tweet, possible_messages)
 	tweet = tweet_split + chosen_second_tweet_split
-print(output)
+print(tweet)
