@@ -61,13 +61,6 @@ def find_similar_words(word_split_on, source_messages_as_Text_object):
 def find_tweets_including_word_split_on_and_similar(word_split_on_and_similar, source_messages):
 	possible_messages = {}
 	possible_messages_list = []
-	# for x in source_messages:
-	# 	x_split = x.split()
-	# 	for y in word_split_on_and_similar: 
-	# 		if y in x_split:
-	# 			possible_messages[x] = y
-	# 			possible_messages_list.append(x)
-	# 			break
 	for y in word_split_on_and_similar:
 		possible_messages_list_for_comprehension = [x for x in source_messages if y in x.split() and x not in possible_messages_list]
 		possible_messages_for_comprehension = {k:y for k in source_messages if y in k.split() and k not in possible_messages} # The value will always be the last matching word from word_split_on_and_similar
