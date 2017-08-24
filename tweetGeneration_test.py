@@ -29,13 +29,14 @@ class TestTweetGenerationFunctions(unittest.TestCase):
 		actual = len(cropped_tweet) <= 140
 		self.assertEqual(actual, expected_output)
 
-	def test_given_tweet_select_word_to_split_on(self):
-		tweet = "testing not_testing"
-		blacklist = []
-		freq_words_in_tweet = {"testing": 3, "not_testing":0, "total_frequency_of_words_in_tweet":3}
-		expected_output = "testing"
-		actual = select_word_to_split_on(tweet, freq_words_in_tweet, blacklist)
-		self.assertEqual(actual, expected_output)
+	# This test is commented out while testing new method of selecting word to split on
+	# def test_given_tweet_select_word_to_split_on(self):
+	# 	tweet = "testing not_testing"
+	# 	blacklist = []
+	# 	freq_words_in_tweet = {"testing": 3, "not_testing":0, "total_frequency_of_words_in_tweet":3}
+	# 	expected_output = "testing"
+	# 	actual = select_word_to_split_on(tweet, freq_words_in_tweet, blacklist)
+	# 	self.assertEqual(actual, expected_output)
 
 	def test_given_tweet_and_all_words_blacklisted(self):
 		tweet = "testing"
@@ -84,6 +85,13 @@ class TestTweetGenerationFunctions(unittest.TestCase):
 		word_split_on = "one"
 		expected_output = "testing one"
 		actual = split_base_tweet_on_word_split_on(tweet, word_split_on)
+		self.assertEqual(actual, expected_output)
+
+	def test_given_possible_messages_list_is_empty_choose_from_source_messages(self):
+		source_messages	= ["Correct result"]
+		possible_messages_list = []
+		expected_output	= "Correct result"
+		actual = choose_second_tweet(possible_messages_list, source_messages)
 		self.assertEqual(actual, expected_output)
 
 if __name__ == '__main__':

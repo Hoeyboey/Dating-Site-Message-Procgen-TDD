@@ -25,17 +25,25 @@ def select_word_to_split_on(tweet, freq_words_in_tweet, blacklist):
 	words_in_tweet = tweet.split(" ")
 	unfinished = True
 	blacklist_counter = 0
-	while unfinished:
-		for x in words_in_tweet:
-			if x not in blacklist:
-				random_number_for_probability = random.random()
-				if freq_words_in_tweet[x]/freq_words_in_tweet["total_frequency_of_words_in_tweet"] > random_number_for_probability:
-					word_split_on = x
-					unfinished = False
-			else:
-				blacklist_counter = blacklist_counter + 1
-				if blacklist_counter == len(words_in_tweet):
-					raise ValueError
+	tweet_split = tweet.split()
+	for x in blacklist:
+		if x in tweet_split:
+			tweet_split.remove(x)
+	if tweet_split == []:
+		raise ValueError
+	else:
+		return random.choice(tweet_split)
+	# while unfinished:
+	# 	for x in words_in_tweet:
+	# 		if x not in blacklist:
+	# 			random_number_for_probability = random.random()
+	# 			if freq_words_in_tweet[x]/freq_words_in_tweet["total_frequency_of_words_in_tweet"] > random_number_for_probability:
+	# 				word_split_on = x
+	# 				unfinished = False
+	# 		else:
+	# 			blacklist_counter = blacklist_counter + 1
+	# 			if blacklist_counter == len(words_in_tweet):
+					# raise ValueError
 	return word_split_on
 
 
@@ -68,10 +76,14 @@ def find_tweets_including_word_split_on_and_similar(word_split_on_and_similar, s
 		possible_messages = {**possible_messages, **possible_messages_for_comprehension}
 	return possible_messages, possible_messages_list
 
-def choose_second_tweet(possible_messages_list):
-	return random.choice(possible_messages_list)
+def choose_second_tweet(possible_messages_list, source_messages):
+	if possible_messages_list == []:
+		return random.choice(source_messages)
+	else:
+		return random.choice(possible_messages_list)
 
 def split_chosen_second_tweet(chosen_second_tweet, possible_messages):
+	#print(possible_messages)
 	chosen_second_tweet_split = chosen_second_tweet.split(possible_messages[chosen_second_tweet])
 	return chosen_second_tweet_split[1]
 
