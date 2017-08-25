@@ -4,7 +4,7 @@ Inspired by the many atrocious messages I receive on a daily bases on dating sit
 
 All the code here is done by me, with some help in the source messages from anonymous folks. Please don't just, y'know, steal the code and make your own bot with it, which, I mean, you could technically do.
 
-So, what does it do? Essentially, it just mashes two sentences up together a set number of times based on the frequency of words. It's going to do more in the future though, I promise!
+So, what does it do? Essentially, it just mashes two sentences up together a set number of times based on their context, using nltk (nltk.org)
 
 If it wasn't clear: source_messages.py/source_messages.txt is intentionally being kept private, and I've hidden the keys consumer/access keys for the twitter bot because, well, I don't want you meddling kids in on it.
 
