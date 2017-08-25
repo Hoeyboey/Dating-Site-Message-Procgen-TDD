@@ -33,17 +33,7 @@ def select_word_to_split_on(tweet, freq_words_in_tweet, blacklist):
 		raise ValueError
 	else:
 		return random.choice(tweet_split)
-	# while unfinished:
-	# 	for x in words_in_tweet:
-	# 		if x not in blacklist:
-	# 			random_number_for_probability = random.random()
-	# 			if freq_words_in_tweet[x]/freq_words_in_tweet["total_frequency_of_words_in_tweet"] > random_number_for_probability:
-	# 				word_split_on = x
-	# 				unfinished = False
-	# 		else:
-	# 			blacklist_counter = blacklist_counter + 1
-	# 			if blacklist_counter == len(words_in_tweet):
-					# raise ValueError
+	# Note - for previous way to select a word, just check git history
 	return word_split_on
 
 
@@ -83,7 +73,6 @@ def choose_second_tweet(possible_messages_list, source_messages):
 		return random.choice(possible_messages_list)
 
 def split_chosen_second_tweet(chosen_second_tweet, possible_messages):
-	#print(possible_messages)
 	chosen_second_tweet_split = chosen_second_tweet.split(possible_messages[chosen_second_tweet])
 	return chosen_second_tweet_split[1]
 
